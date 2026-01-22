@@ -165,7 +165,7 @@ def streamlit_dvd():
         
     with right:
         revenue_by_category = (
-            df.groupby("category", as_index=False)
+            filtered_df.groupby("category", as_index=False)
                 .agg(total_revenue=("revenue", "sum"))
         )
         st.subheader("Category Revenue Share")   
@@ -186,7 +186,7 @@ def streamlit_dvd():
     left, right = st.columns(2)
     with left:
         store_metrics = (
-            df.groupby("store_id", as_index=False)
+            filtered_df.groupby("store_id", as_index=False)
                 .agg(
                 total_revenue=("revenue", "sum"),
                 total_rentals=("rental_id", "count")
@@ -209,7 +209,7 @@ def streamlit_dvd():
         
     with right:
         top_5_country = (
-            df.groupby("country", as_index=False)
+            filtered_df.groupby("country", as_index=False)
                 .agg(total_revenue=("revenue", "sum"))
                 .sort_values("total_revenue", ascending=False)
                 .head(5)
